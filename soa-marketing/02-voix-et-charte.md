@@ -2,6 +2,7 @@
 
 ## Voix (comment SOA parle)
 - On **tutoie**. Toujours.
+- **« Pilates » s'écrit toujours avec un P majuscule**, partout : légendes, titres, visuels, couvertures (« le Pilates », « Pilates Reformer »), même dans les titres en minuscules. Seuls les hashtags restent en minuscules (#pilatesreformer).
 - **Écriture neutre** : « prêt·e », « seul·e », « tes ami·es ». Jamais uniquement au féminin.
 - Ton : chaleureux, direct, un peu d'humour, jamais « coach motivation » ni corporate.
 - Phrases courtes. Minuscules acceptées dans les accroches. Emojis rares (🤎 🍵 👀).

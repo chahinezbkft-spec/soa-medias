@@ -5,7 +5,7 @@ import base_cannelle as g3
 D=g3.D; V=os.path.join(os.path.dirname(D),"soa","rushes","videos")
 CAN,CHOC,CAR,CREME=g3.CAN,g3.CHOC,g3.CAR,g3.CREME
 CSS=g3.CSS.replace("height:1440px","height:1920px")+f"""
-.sans{{display:block;font-family:'Inter Tight';font-weight:700;font-size:118px;letter-spacing:-.05em;line-height:.92;text-transform:lowercase}}
+.sans{{display:block;font-family:'Inter Tight';font-weight:700;font-size:118px;letter-spacing:-.05em;line-height:.92}}
 .serif{{display:block;font-family:'Instrument Serif';font-style:italic;font-weight:400;font-size:150px;letter-spacing:-.02em;line-height:.9;margin-top:-6px}}
 .h{{position:absolute;left:96px;right:96px}}
 .ph{{filter:saturate(.88) sepia(.18) contrast(1.03)}}
@@ -29,11 +29,12 @@ def solid_title(color,sans,serif,lab,ink=CREME,acc=CAR,off=120,note=None):
       <div class="h" style="top:640px;color:{ink}"><span class="sans" style="font-size:130px">{sans}</span><span class="serif" style="font-size:165px;padding-left:{off}px;color:{acc}">{serif}</span></div>{n}
       <div class="lab" style="left:96px;bottom:300px;color:{ink}">@soa.reformer</div>''')
 COVERS={
+ "mondes": ph("IMG_1467",3.0,"les 2 mondes","de SOA.",lab="coaché · digital · hybride",off=170,pos="50% 40%"),
  "versions": solid(CAN,f'''<div class="lab" style="left:96px;top:330px">daily reminder</div>
     <div class="hand" style="position:absolute;left:96px;right:120px;top:700px;font-size:72px">fais-le le cœur brisé, fais-le en retard, fais-le quand même.</div>
     <div class="lab" style="left:96px;bottom:300px">@soa.reformer</div>'''),
  "porte": ph("IMG_9122",1.5,"ta première séance","chez SOA.",lab="pov",off=200),
- "lets": ph("IMG_3342",0.4,"on teste le pilates","ce soir ?",off=260,pos="40% 45%"),
+ "lets": ph("IMG_3342",0.4,"on teste le Pilates","ce soir ?",off=260,pos="40% 45%"),
  "matcha": ph("IMG_9300",1.0,"le rituel","d'après.",lab="18h : reformer · 19h : matcha",off=170,pos="50% 55%"),
  "coachs": ph("IMG_6724",2.0,"ce que ton coach","voit.",off=230),
  "yesbut": ph("IMG_9426",4.5,"yes…","but.",lab="la vraie version",off=160,pos="50% 35%"),
@@ -42,13 +43,13 @@ COVERS={
  "outil": ph("IMG_9451",3.2,"l'outil, le carburant,","le travail.",off=120),
  "local": ph("IMG_2206",8.3,"si tu habites à saint-maur,","viens voir.",lab="la varenne",off=140,pos="75% 50%"),
  "checklist": solid_title(CREME,"5 signes que","tu as besoin du reformer.","checklist",ink=CHOC,acc=CAN,off=60,note="combien tu en coches ? ↘"),
- "mythes": ph("IMG_6817",6.0,"3 idées reçues","sur le pilates.",off=120),
+ "mythes": ph("IMG_6817",6.0,"3 idées reçues","sur le Pilates.",off=120),
  "avant_apres": ph("IMG_6794",1.5,"séance 1","vs séance 10.",off=140),
  "texto": solid_title(CHOC,"le texto de ta pote","à 18h12.","quand tu veux annuler",off=200,note="envoie-lui ↘"),
  "dix": ph("IMG_9420",1.5,"10 exercices,","10 secondes.",off=120),
  "premiere": ph("IMG_4615",0.5,"ta première séance,","étape par étape.",off=80),
  "duo": ph("IMG_3069",1.0,"viens","à deux.",lab="c'est plus fun",off=170),
- "pov_coach": solid_title(CAN,"pov : ton coach dit","« encore 10 ».","pilates reformer",off=80,note="tague ton binôme ↘"),
+ "pov_coach": solid_title(CAN,"pov : ton coach dit","« encore 10 ».","Pilates reformer",off=80,note="tague ton binôme ↘"),
  "muscu": ph("IMG_6799",2.5,"tu fais de la muscu ?","ajoute ça.",off=200),
 }
 if __name__=="__main__":
