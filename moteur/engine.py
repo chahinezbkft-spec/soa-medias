@@ -58,7 +58,7 @@ def render(spec, out):
     # pré-extraction des images vidéo
     for s in spec["scenes"]:
         for L in s["layers"]:
-            if L["type"] == "video":
+            if L["type"] in ("video", "cliptext", "card"):
                 L["frames"] = ["file://" + f for f in frames(L["clip"], L.get("start", 0), s["dur"] + L.get("extra", 0), L.get("speed", 1.0), L.get("crop"))]
     html = os.path.join(HERE, "_stage.html")
     open(html, "w", encoding="utf-8").write(PAGE.replace("/*SPEC*/null", json.dumps(spec)))
@@ -86,7 +86,7 @@ def still(spec, t, out):
     """Capture une seule image à l'instant t (pour vérifier avant le rendu complet)."""
     for s in spec["scenes"]:
         for L in s["layers"]:
-            if L["type"] == "video" and "frames" not in L:
+            if L["type"] in ("video", "cliptext", "card") and "frames" not in L:
                 L["frames"] = ["file://" + f for f in frames(L["clip"], L.get("start", 0), s["dur"] + L.get("extra", 0), L.get("speed", 1.0), L.get("crop"))]
     html = os.path.join(HERE, "_stage.html")
     open(html, "w", encoding="utf-8").write(PAGE.replace("/*SPEC*/null", json.dumps(spec)))
