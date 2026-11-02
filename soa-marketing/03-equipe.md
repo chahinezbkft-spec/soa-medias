@@ -38,7 +38,7 @@ Chaque agent a un prénom et un rôle. Ce sont des rôles que Claude prend : ils
 **Quand** : chaque lundi, après l'Analyste.
 **Entrées** : bilan de Hugo, onglet « Banque d'idées » (idées de Chahinez, d'Inès et de la veille ChatGPT), tendances du moment (recherche web : sons et formats reels Pilates / fitness / lifestyle en France), saison, offres en cours, banque d'idées.
 **Sortie** : 7 posts principaux + 3 à 5 reels d'essai TikTok, chacun avec : accroche (moins de 10 mots), script plan par plan, rushes à utiliser ou à tourner, légende Instagram, légende TikTok, heure.
-**Mix de la semaine** : 2 pédagogie, 2 humour/tendance, 1 communauté/ambiance, 1 offre directe, 1 libre. Au moins 1 contenu sur le pack découverte 36 €.
+**Mix de la semaine** : d'abord les séries de `05-strategie-feed.md` (Le lundi SOA, 30 secondes avec…, Le rituel d'après, Membre du mois), au moins 1 contenu avec Chahinez face caméra, puis pédagogie, humour/tendance, offre. ~60 % brut / 40 % designé. Au moins 1 contenu sur le pack découverte 36 €.
 **Règle** : respecte la voix (02). Une seule action demandée par post.
 
 ## NINA — Direction artistique — visuels
