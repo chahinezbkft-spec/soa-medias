@@ -17,13 +17,16 @@ au 111 avenue du Bac, La Varenne (Saint-Maur-des-Fossés). Compte : @soa.reforme
 
 ## Charte (à respecter dans tous les montages)
 - Typo Inter Tight (gras, minuscules) + Instrument Serif italique pour le mot accentué (`*mot*` dans le texte, `~` pour garder plusieurs mots ensemble, `_mot_` pour le doré).
-- Couleurs : brun foncé #211B17, crème #F5EFE7, doré #D9B77E. Pas de noir et blanc.
+- Couleurs et mise en page : charte v5 « SOA cannelle » dans soa-marketing/02-voix-et-charte.md (cannelle #7A4636, chocolat #3A2820, caramel #B88A63, crème #EFE5DA). Pas de noir et blanc, pas de bleu.
 - « Pilates » toujours avec un P majuscule (légendes et visuels), sauf dans les hashtags.
 - On tutoie, écriture neutre (« seul·e », « ami·e »), jamais uniquement au féminin.
 - Accroche lisible dans la première seconde, coupes toutes les 1,5 à 2,5 s, fin avec l'offre :
   « coaché · digital · hybride » + « pack découverte : 1 coachée + 1 digitale · 36 € » (fonction END()) et @soa.reformer.
 - Pas de musique dans le fichier : le son tendance est ajouté dans Instagram / TikTok.
 - Ne montrer des visages que de personnes qui ont donné leur accord.
+
+## Reels d'essai
+- Méthode « 2 reels d'essai par jour, ultra tendance » : soa-marketing/06-reels-tendance.md.
 
 ## Demandes types
 - « Fais 10 variantes d'accroche du reel porte pour des reels d'essai. »
