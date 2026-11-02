@@ -1,0 +1,5 @@
+rushes/
+sortie/
+moteur/cache/
+__pycache__/
+*.part.mp4
