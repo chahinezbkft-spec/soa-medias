@@ -3,3 +3,4 @@ sortie/
 moteur/cache/
 __pycache__/
 *.part.mp4
+moteur/_stage.html
