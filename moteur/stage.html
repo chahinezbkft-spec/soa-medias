@@ -115,7 +115,7 @@ SPEC.scenes.forEach(function(s,i){
       var al=L.align||'center';n.style.textAlign=al;
       n.style.left=(L.x!=null?L.x:(al==='center'?50:9))+'%';n.style.top=(L.y!=null?L.y:50)+'%';
       n.style.transform='translate('+(al==='center'?'-50%':al==='right'?'-100%':'0')+',-50%)'+(L.rotate?' rotate('+L.rotate+'deg)':'');
-      if(L.color)n.style.color=L.color;
+      if(L.color)n.style.color=L.color;if(L.size)n.style.fontSize=L.size+'px';if(L.width)n.style.width=L.width+'px';
       if(L.bg){n.style.background=L.bg;n.style.padding='10px 26px'}
     }
     L.el=L.el||n;el.appendChild(n);

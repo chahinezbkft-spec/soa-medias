@@ -106,6 +106,33 @@ def e20261103_2():
     ]}
 
 
+def e20261104_1():
+    """Tendance « pose ton téléphone » : post-it manuscrit qui s'écrit mot à mot (Banque d'idées SOA-20261103-06, idée de Chahinez)."""
+    POSTIT = [{"type": "panel", "color": CREME, "box": [70, 230, 560, 690], "at": 0, "dur": 0.01},
+              {"type": "panel", "color": CAR, "box": [250, 204, 200, 52], "at": 0, "dur": 0.01}]
+    BLOCS = [(["pose~ton", "téléphone"], 19.4), (["et~viens"], 27.3), (["bouger."], 32.6), (["(puis~boire", "un~matcha)"], 41.4)]
+
+    def note(k, t0):
+        """Les blocs déjà écrits restent ; le bloc k s'écrit lettre par lettre à partir de t0."""
+        L = []
+        for i, (lines, y) in enumerate(BLOCS[:k + 1]):
+            col = CAN if i == 3 else CHOC
+            L.append(txt(lines, ((t0 if i == k else -5), 99), "hand", y=y, anim="type", align="left", x=11,
+                         color=col, size=74, width=480, stagger=0.045, out=False))
+        return L
+
+    def sc(clip, st, k, dur, zoom=(1.02, 1.12)):
+        return {"dur": dur, "in": "cut", "out": "cut", "layers": [vid(clip, st, zoom), dim(.18)] + POSTIT + note(k, 0.05) + FX}
+
+    return {"scenes": [
+        sc("IMG_4850", 0.0, 0, 2.2, (1.0, 1.08)),     # membre au téléphone sur le reformer
+        sc("IMG_4618", 0.4, 1, 1.9),                  # arrivée en cours, le coach accueille
+        sc("IMG_2707", 1.2, 2, 1.9),                  # cours : jambes en l'air
+        sc("IMG_9451", 2.6, 3, 2.5, (1.0, 1.06)),     # le matcha versé sur le lait
+        fin("IMG_9060", 1.5, pill="envoie-le à ton binôme matcha"),
+    ]}
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     spec = globals()[name]()
