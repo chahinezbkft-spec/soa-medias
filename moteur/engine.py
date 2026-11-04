@@ -20,14 +20,14 @@ os.makedirs(CACHE, exist_ok=True)
 def find(name):
     for f in os.listdir(RUSH):
         if f.startswith(name):
-            return f"{RUSH}/{f}"
+            return os.path.join(RUSH, f)
     raise FileNotFoundError(name)
 
 
 def frames(clip, start, dur, speed=1.0, crop=None):
     """Extrait les images d'un extrait, recadrées 9:16 1080x1920. Retourne la liste des fichiers."""
     key = f"{clip}_{start}_{dur}_{speed}_{crop}".replace("/", "_").replace(" ", "")
-    d = f"{CACHE}/{key}"
+    d = os.path.join(CACHE, key)
     n = int(round(dur * FPS))
     if os.path.isdir(d) and len(os.listdir(d)) >= n:
         return [f"{d}/{i:04d}.jpg" for i in range(1, n + 1)]
@@ -48,7 +48,35 @@ def frames(clip, start, dur, speed=1.0, crop=None):
     return files[:n]
 
 
-PAGE = open(os.path.join(os.path.dirname(__file__), "stage.html"), encoding="utf-8").read()
+_SESSION = None
+def cutout_frames(clip, start, dur, speed=1.0, crop=None, step=2):
+    """Images de la personne détourée (PNG transparents), pour mettre un texte DERRIÈRE elle."""
+    global _SESSION
+    src = frames(clip, start, dur, speed, crop)
+    d = os.path.dirname(src[0]) + "_cut"
+    os.makedirs(d, exist_ok=True)
+    from PIL import Image, ImageFilter
+    out = []
+    last = None
+    for i, f in enumerate(src):
+        p = os.path.join(d, os.path.basename(f).replace(".jpg", ".png"))
+        if not os.path.exists(p):
+            if i % step and last:
+                out.append(last); continue
+            if _SESSION is None:
+                from rembg import new_session
+                _SESSION = new_session("u2net_human_seg")
+            from rembg import remove
+            im = Image.open(f).convert("RGB")
+            m = remove(im, session=_SESSION, only_mask=True).filter(ImageFilter.GaussianBlur(1.2))
+            im.putalpha(m)
+            im.save(p)
+        last = p
+        out.append(p)
+    return out
+
+
+PAGE = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "stage.html"), encoding="utf-8").read()
 
 
 def render(spec, out):
@@ -58,9 +86,12 @@ def render(spec, out):
     # pré-extraction des images vidéo
     for s in spec["scenes"]:
         for L in s["layers"]:
+            if L["type"] == "cutout":
+                L["frames"] = ["file://" + f for f in cutout_frames(L["clip"], L.get("start", 0), s["dur"] + L.get("extra", 0), L.get("speed", 1.0), L.get("crop"))]
+                continue
             if L["type"] in ("video", "cliptext", "card"):
                 L["frames"] = ["file://" + f for f in frames(L["clip"], L.get("start", 0), s["dur"] + L.get("extra", 0), L.get("speed", 1.0), L.get("crop"))]
-    html = os.path.join(HERE, "_stage.html")
+    html = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_stage.html")
     open(html, "w", encoding="utf-8").write(PAGE.replace("/*SPEC*/null", json.dumps(spec)))
     nf = int(round(total * FPS))
     ff = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "image2pipe", "-framerate", str(FPS), "-c:v", "mjpeg", "-i", "-",
@@ -86,9 +117,12 @@ def still(spec, t, out):
     """Capture une seule image à l'instant t (pour vérifier avant le rendu complet)."""
     for s in spec["scenes"]:
         for L in s["layers"]:
+            if L["type"] == "cutout" and "frames" not in L:
+                L["frames"] = ["file://" + f for f in cutout_frames(L["clip"], L.get("start", 0), s["dur"] + L.get("extra", 0), L.get("speed", 1.0), L.get("crop"))]
+                continue
             if L["type"] in ("video", "cliptext", "card") and "frames" not in L:
                 L["frames"] = ["file://" + f for f in frames(L["clip"], L.get("start", 0), s["dur"] + L.get("extra", 0), L.get("speed", 1.0), L.get("crop"))]
-    html = os.path.join(HERE, "_stage.html")
+    html = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_stage.html")
     open(html, "w", encoding="utf-8").write(PAGE.replace("/*SPEC*/null", json.dumps(spec)))
     with sync_playwright() as p:
         b = p.chromium.launch(**({"executable_path": CHROME} if CHROME else {}), args=["--allow-file-access-from-files"])

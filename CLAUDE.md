@@ -6,12 +6,13 @@ au 111 avenue du Bac, La Varenne (Saint-Maur-des-Fossés). Compte : @soa.reforme
 ## Organisation
 - `rushes/` : vidéos brutes du studio (fichiers iPhone, idéalement en 4K). Ne jamais les modifier ni les supprimer.
 - `moteur/` : le moteur de montage en motion design.
+  - `exemples/classe.py` et `exemples/inspi.py` : les 2 démos validées (style à suivre, voir soa-marketing/07-motion-design.md).
   - `engine.py` découpe les vidéos en images et compose chaque image dans `stage.html` (textes animés, transitions, zooms, écran partagé, bulles de conversation), puis encode en MP4 1080x1920, 30 i/s, sans son.
   - `reels.py` et `reels2.py` contiennent les montages déjà faits (une fonction par reel). Les extraits sont désignés par le début du nom de fichier (ex. "IMG_6724") et un point de départ en secondes.
 - `sortie/` : les reels rendus.
 
 ## Lancer un rendu
-1. Installer une fois : Python 3, ffmpeg, puis `pip install playwright` et `python -m playwright install chromium`.
+1. Installer une fois : Python 3, ffmpeg, puis `pip install playwright rembg onnxruntime pillow` et `python -m playwright install chromium`.
 2. Rendu d'un reel : `python moteur/reels.py porte` (ou `python moteur/reels2.py local`).
 3. Vérifier d'abord quelques images : `python moteur/reels.py porte still 1,4,8`.
 
