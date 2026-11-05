@@ -133,6 +133,66 @@ def e20261104_1():
     ]}
 
 
+def e20261105_2():
+    """Série « fais-le pour… » : ton rythme. Timelapse de la journée avec l'heure qui défile (horloge 07:00 → 22:30,
+    horaires réels du studio 7j/7). Idées de Chahinez SOA-20261104-02 + SOA-20261103-03. Style classe, 1 effet signature : horloge."""
+    GC = "saturate(.82) sepia(.2) contrast(1.06) brightness(.94)"
+
+    def v(clip, st, zoom=(1.04, 1.12), speed=1.0, grade=GC):
+        return {"type": "video", "clip": clip, "start": st, "zoom": list(zoom), "grade": grade, "speed": speed, "extra": 0.9, "ease": "inout"}
+
+    def t(lines, at, style, y, anim="mask", **kw):
+        d = {"type": "text", "lines": lines, "at": list(at), "style": style, "y": y, "anim": anim, "align": "left", "x": 8.9,
+             "dur": 1.0, "ease": "inout", "stagger": 0.12}
+        d.update(kw); return d
+
+    TOPV = {"type": "dim", "color": "linear-gradient(to bottom, rgba(42,28,22,.86), rgba(42,28,22,.5) 30%, rgba(42,28,22,.25) 50%, rgba(42,28,22,.2))"}
+    BOTV = {"type": "dim", "color": "linear-gradient(to bottom, rgba(42,28,22,.2), rgba(42,28,22,.3) 45%, rgba(42,28,22,.82))"}
+    GR = {"type": "grain", "opacity": .07}
+
+    def clock(a, b, label, y=230, at=0.15, dur=1.3):
+        return {"type": "clock", "x": 96, "y": y, "at": at, "from": a, "to": b, "dur": dur, "label": label}
+
+    return {"scenes": [
+        # 1. accroche : arrivée au studio (QR code), horloge sur 07:00 ; texte en bas (visage en haut du plan)
+        {"dur": 2.4, "in": "fade", "layers": [
+            v("IMG_4613", 0.0, (1.0, 1.08)), BOTV,
+            clock(420, 420, "ouvert 7j/7", y=1080, at=0.0, dur=0.1),
+            t(["fais-le pour"], (0.0, 9), "edito", 75.5, color=CREME),
+            t(["*ton~rythme.*"], (0.15, 9), "edito", 82, color=CAR), GR]},
+        # 2. séance digitale : l'heure avance (avant le boulot)
+        {"dur": 2.0, "in": "window", "windowDur": 0.9, "windowFrom": 22, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_9319", 4.2, (1.1, 1.02)), TOPV,
+            clock(420, 480, "avant le boulot ?", at=0.2, dur=1.2),
+            t(["en digital,"], (0.5, 9), "edito", 27, color=CREME),
+            t(["*à~ton~heure.*"], (0.7, 9), "edito", 33.5, color=CAR), GR]},
+        # 3. cours coaché : midi
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.7, "layers": [
+            v("IMG_6836", 3.2, (1.02, 1.1)), TOPV,
+            clock(480, 750, "à la pause déj ?", at=0.15, dur=1.2),
+            t(["en coaché,"], (0.45, 9), "edito", 27, color=CREME),
+            t(["*7~places~max.*"], (0.65, 9), "edito", 33.5, color=CAR), GR]},
+        # 4. fin de journée, bougies : jusqu'à 22:30
+        {"dur": 2.2, "in": "dissolve", "dissolve": 0.7, "layers": [
+            v("IMG_0822", 1.0, (1.12, 1.02), speed=0.8, grade="saturate(.8) sepia(.28) contrast(1.06) brightness(.78)"), TOPV,
+            clock(750, 1350, "après le dîner ?", at=0.15, dur=1.4),
+            t(["ou tard le soir."], (0.5, 9), "edito", 27, color=CREME),
+            t(["*jusqu'à~22h30.*"], (0.75, 9), "edito", 33.5, color=CAR), GR]},
+        # 5. fin crème : offre
+        {"dur": 2.8, "in": "dissolve", "dissolve": 0.7, "out": "fadeblack", "layers": [
+            {"type": "color", "color": CREME}, {"type": "grain", "opacity": .1},
+            t(["SOA"], (0.3, 9), "logo", 18, anim="track", color=CHOC),
+            t(["coaché · digital · hybride"], (0.45, 9), "caps", 36, anim="track", color=CAN),
+            t(["fais-le pour"], (0.6, 9), "edito", 44, color=CHOC),
+            t(["*ton~rythme.*"], (0.85, 9), "edito", 50.5, color=CAN),
+            {"type": "rule", "x": 96, "y": 1110, "w": 300, "at": 1.2, "color": CAN},
+            t(["pack découverte"], (1.3, 9), "caps", 62, anim="track", color=CHOC),
+            t(["1 coachée + 1 digitale · 36 €"], (1.45, 9), "caps", 65.5, anim="track", color=CHOC),
+            t(["@soa.reformer · lien en bio"], (1.7, 9), "caps", 88, anim="fade", color=CAN)]},
+    ]}
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     spec = globals()[name]()
