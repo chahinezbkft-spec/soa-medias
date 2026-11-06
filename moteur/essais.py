@@ -193,6 +193,63 @@ def e20261105_2():
     ]}
 
 
+def e20261106_2():
+    """Série « fais-le pour… » (idée de Chahinez SOA-20261104-03) : fais-le pour toi. Une personne seule en séance
+    digitale, casque sur les oreilles. Style classe ; 2 effets signature : mot géant DERRIÈRE la personne (accroche)
+    + interrupteur « mode ne pas déranger »."""
+    GC = "saturate(.82) sepia(.2) contrast(1.06) brightness(.94)"
+
+    def v(clip, st, zoom=(1.04, 1.12), speed=1.0, grade=GC):
+        return {"type": "video", "clip": clip, "start": st, "zoom": list(zoom), "grade": grade, "speed": speed, "extra": 0.9, "ease": "inout"}
+
+    def t(lines, at, style, y, anim="mask", **kw):
+        d = {"type": "text", "lines": lines, "at": list(at), "style": style, "y": y, "anim": anim, "align": "left", "x": 8.9,
+             "dur": 1.0, "ease": "inout", "stagger": 0.12}
+        d.update(kw); return d
+
+    TOPV = {"type": "dim", "color": "linear-gradient(to bottom, rgba(42,28,22,.86), rgba(42,28,22,.5) 30%, rgba(42,28,22,.25) 50%, rgba(42,28,22,.2))"}
+    GR = {"type": "grain", "opacity": .07}
+    Z1 = (1.0, 1.07)
+
+    return {"scenes": [
+        # 1. accroche : « toi. » géant DERRIÈRE la personne allongée (casque) ; visage en bas à droite, rien dessus
+        {"dur": 2.6, "in": "fade", "layers": [
+            v("IMG_9319", 5.0, Z1), {"type": "dim", "color": "rgba(42,28,22,.22)"}, TOPV,
+            t(["fais-le pour"], (0.0, 9), "edito", 14, color=CREME),
+            t(["toi."], (0.2, 9), "giant", 46.5, color=CREME, size=430, dur=1.1),
+            {"type": "cutout", "clip": "IMG_9319", "start": 5.0, "zoom": list(Z1), "ease": "inout", "grade": GC, "extra": 0.9},
+            GR]},
+        # 2. le casque posé sur le chariot (plongée)
+        {"dur": 1.9, "in": "dissolve", "dissolve": 0.6, "layers": [
+            v("IMG_6639", 7.0, (1.12, 1.02)), TOPV,
+            t(["ton casque,"], (0.3, 9), "edito", 12, color=CREME),
+            t(["*ton~programme.*"], (0.5, 9), "edito", 18.5, color=CAR), GR]},
+        # 3. le doigt lance la séance sur l'écran : interrupteur « ne pas déranger »
+        {"dur": 2.1, "in": "window", "windowDur": 0.8, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_6650", 4.0, (1.02, 1.1)), TOPV,
+            t(["ta séance,"], (0.3, 9), "edito", 12, color=CREME),
+            t(["*rien~qu'à~toi.*"], (0.5, 9), "edito", 18.5, color=CAR),
+            {"type": "toggle", "x": 96, "y": 1560, "at": 1.2, "inAt": 0.7, "label": "ne pas déranger", "size": 56}, GR]},
+        # 4. plan large : seul·e sur son reformer, à son heure
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.6, "layers": [
+            v("IMG_9499", 2.0, (1.0, 1.08)), TOPV,
+            t(["seul·e sur ton reformer,"], (0.3, 9), "edito", 8, color=CREME, size=96),
+            t(["*à~ton~heure.*"], (0.5, 9), "edito", 13.5, color=CAR, size=96), GR]},
+        # 5. fin crème : offre
+        {"dur": 2.8, "in": "dissolve", "dissolve": 0.7, "out": "fadeblack", "layers": [
+            {"type": "color", "color": CREME}, {"type": "grain", "opacity": .1},
+            t(["SOA"], (0.3, 9), "logo", 18, anim="track", color=CHOC),
+            t(["coaché · digital · hybride"], (0.45, 9), "caps", 36, anim="track", color=CAN),
+            t(["fais-le pour"], (0.6, 9), "edito", 44, color=CHOC),
+            t(["*toi.*"], (0.85, 9), "edito", 50.5, color=CAN),
+            {"type": "rule", "x": 96, "y": 1110, "w": 300, "at": 1.2, "color": CAN},
+            t(["pack découverte"], (1.3, 9), "caps", 62, anim="track", color=CHOC),
+            t(["1 coachée + 1 digitale · 36 €"], (1.45, 9), "caps", 65.5, anim="track", color=CHOC),
+            t(["@soa.reformer · lien en bio"], (1.7, 9), "caps", 88, anim="fade", color=CAN)]},
+    ]}
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     spec = globals()[name]()
