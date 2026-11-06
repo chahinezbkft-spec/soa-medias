@@ -17,6 +17,7 @@ Objectif : tester beaucoup d'accroches et de formats tendance pour trouver ceux 
 - Accroche lisible en moins d'1 seconde, 3 à 7 mots, tutoiement, écriture neutre, « Pilates » avec un P majuscule.
 - 7 à 12 secondes, coupes rapides, une seule idée, fin : pack découverte 36 € ou « envoie-le à… ».
 - Varier : humour, POV, mythe, liste, ASMR matcha, avant/après, local (Saint-Maur / La Varenne).
+- **Série « fais-le pour… » : 1 épisode par semaine maximum**, avec d'autres posts entre deux épisodes (jamais deux jours de suite). Avant d'en faire un, vérifier dans Metricool la date du dernier épisode. Les épisodes prêts d'avance sont rangés en `reels/SOA-serie-faislepour-<thème>.mp4` + `img/cover-serie-faislepour-<thème>.jpg`.
 
 ## Étape 3 — Monter (Tom + Nina)
 - Moteur `moteur/` (voir CLAUDE.md), rushes dans `rushes/` (catalogue : `soa-marketing/catalogue-rushes/`).

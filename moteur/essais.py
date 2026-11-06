@@ -193,8 +193,8 @@ def e20261105_2():
     ]}
 
 
-def e20261106_2():
-    """Série « fais-le pour… » (idée de Chahinez SOA-20261104-03) : fais-le pour toi. Une personne seule en séance
+def serie_faislepour_toi():
+    """Série hebdo « fais-le pour… » (1 épisode par semaine, idée de Chahinez SOA-20261104-03) : fais-le pour toi. Prêt, à programmer la semaine du 9 nov. Une personne seule en séance
     digitale, casque sur les oreilles. Style classe ; 2 effets signature : mot géant DERRIÈRE la personne (accroche)
     + interrupteur « mode ne pas déranger »."""
     GC = "saturate(.82) sepia(.2) contrast(1.06) brightness(.94)"
@@ -250,13 +250,63 @@ def e20261106_2():
     ]}
 
 
+def e20261106_2():
+    """Tendance TikTok « Why Would I Deceive You? » (NewEngen, 05/11/2026 ; Banque d'idées SOA-20261105-INES-03) :
+    la promesse du coach « plus que 5 »… et le compteur qui continue. Humour tendre, style classe, 1 effet signature : compteur serif."""
+    GC = "saturate(.82) sepia(.2) contrast(1.06) brightness(.94)"
+
+    def v(clip, st, zoom=(1.04, 1.12), speed=1.0, grade=GC, **kw):
+        d = {"type": "video", "clip": clip, "start": st, "zoom": list(zoom), "grade": grade, "speed": speed, "extra": 0.9, "ease": "inout"}
+        d.update(kw); return d
+
+    def t(lines, at, style, y, anim="mask", **kw):
+        d = {"type": "text", "lines": lines, "at": list(at), "style": style, "y": y, "anim": anim, "align": "left", "x": 8.9,
+             "dur": 1.0, "ease": "inout", "stagger": 0.12}
+        d.update(kw); return d
+
+    TOPV = {"type": "dim", "color": "linear-gradient(to bottom, rgba(42,28,22,.86), rgba(42,28,22,.5) 30%, rgba(42,28,22,.25) 50%, rgba(42,28,22,.2))"}
+    GR = {"type": "grain", "opacity": .07}
+
+    return {"scenes": [
+        # 1. accroche : la promesse (texte en haut, au-dessus du coach)
+        {"dur": 2.3, "in": "fade", "layers": [
+            v("IMG_6610", 1.0, (1.0, 1.08)), TOPV,
+            t(["ton coach de Pilates :"], (0.0, 9), "caps", 9, anim="track", color=CAR),
+            t(["« plus que *5.* »"], (0.05, 9), "edito", 13, color=CREME, size=150), GR]},
+        # 2. vidéo en haut, compteur serif qui continue sur aplat cannelle
+        {"dur": 2.6, "in": "dissolve", "dissolve": 0.6, "bpm": 120, "layers": [
+            {"type": "color", "color": CAN}, {"type": "grain", "opacity": .12},
+            v("IMG_6752", 2.0, (1.1, 1.18), box=[0, 0, 1080, 1060]),
+            {"type": "counter", "from": 5, "to": 9, "at": 0.2, "dur": 1.8, "style": "numserif", "x": 8.9, "y": 66, "align": "left", "color": CREME},
+            t(["« pourquoi je te"], (0.9, 9), "edito", 81, color=CREME, size=96),
+            t(["*mentirais~?* »"], (1.1, 9), "edito", 86.5, color=CAR, size=96), GR]},
+        # 3. la réaction (texte en haut, visage au centre jamais couvert)
+        {"dur": 2.2, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_6801", 1.6, (1.02, 1.1)), TOPV,
+            t(["(spoiler :"], (0.2, 9), "edito", 9, color=CREME),
+            t(["*c'était~pas~5.)*"], (0.45, 9), "edito", 15.5, color=CAR), GR]},
+        # 4. fin crème : offre
+        {"dur": 2.8, "in": "dissolve", "dissolve": 0.7, "out": "fadeblack", "layers": [
+            {"type": "color", "color": CREME}, {"type": "grain", "opacity": .1},
+            t(["SOA"], (0.3, 9), "logo", 18, anim="track", color=CHOC),
+            t(["coaché · digital · hybride"], (0.45, 9), "caps", 36, anim="track", color=CAN),
+            t(["et tu reviens"], (0.6, 9), "edito", 44, color=CHOC),
+            t(["*quand~même.*"], (0.85, 9), "edito", 50.5, color=CAN),
+            {"type": "rule", "x": 96, "y": 1110, "w": 300, "at": 1.2, "color": CAN},
+            t(["pack découverte"], (1.3, 9), "caps", 62, anim="track", color=CHOC),
+            t(["1 coachée + 1 digitale · 36 €"], (1.45, 9), "caps", 65.5, anim="track", color=CHOC),
+            t(["@soa.reformer · lien en bio"], (1.7, 9), "caps", 88, anim="fade", color=CAN)]},
+    ]}
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     spec = globals()[name]()
-    num = name.split("_")[1]
+    num = name.split("_")[-1]
     date = name[1:9]
+    base = f"SOA-essai-{date}-{num}" if name[1:5].isdigit() else "SOA-" + name.replace("_", "-")
     if len(sys.argv) > 2 and sys.argv[2] == "still":
         still(spec, [float(x) for x in sys.argv[3].split(",")], os.path.join(OUT, f"_{name}.jpg"))
     else:
-        render(spec, os.path.join(OUT, f"SOA-essai-{date}-{num}.mp4"))
+        render(spec, os.path.join(OUT, base + ".mp4"))
     print("ok")
