@@ -299,6 +299,64 @@ def e20261106_2():
     ]}
 
 
+def e20261107_2():
+    """Tendance TikTok « Money can't buy happiness, but… » (Pepper Agency, 02/11/2026) adaptée en français :
+    « l'argent ne fait pas le bonheur… mais ». Montage de petits bonheurs du studio. Style classe, 1 effet signature :
+    étiquette 36 € qui tombe et se balance sur le carton final."""
+    GC = "saturate(.82) sepia(.2) contrast(1.06) brightness(.94)"
+
+    def v(clip, st, zoom=(1.04, 1.12), speed=1.0, grade=GC, **kw):
+        d = {"type": "video", "clip": clip, "start": st, "zoom": list(zoom), "grade": grade, "speed": speed, "extra": 0.9, "ease": "inout"}
+        d.update(kw); return d
+
+    def t(lines, at, style, y, anim="mask", **kw):
+        d = {"type": "text", "lines": lines, "at": list(at), "style": style, "y": y, "anim": anim, "align": "left", "x": 8.9,
+             "dur": 0.7, "ease": "inout", "stagger": 0.1}
+        d.update(kw); return d
+
+    TOPV = {"type": "dim", "color": "linear-gradient(to bottom, rgba(42,28,22,.86), rgba(42,28,22,.5) 30%, rgba(42,28,22,.25) 50%, rgba(42,28,22,.2))"}
+    BOTV = {"type": "dim", "color": "linear-gradient(to bottom, rgba(42,28,22,.2), rgba(42,28,22,.3) 50%, rgba(42,28,22,.85))"}
+    GR = {"type": "grain", "opacity": .07}
+
+    return {"scenes": [
+        # 1. accroche : le proverbe, en haut (la personne est petite, au centre du plan large)
+        {"dur": 2.0, "in": "cut", "bpm": 120, "layers": [
+            v("IMG_3764", 1.0, (1.0, 1.08)), TOPV,
+            t(["l'argent ne fait pas"], (0.0, 9), "edito", 11, color=CREME, dur=0.6),
+            t(["*le~bonheur…*"], (0.1, 9), "edito", 17.5, color=CAR, dur=0.6), GR]},
+        # 2. arrivée au studio : texte en bas (visages en haut du plan)
+        {"dur": 1.8, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_4610", 0.2, (1.02, 1.1)), BOTV,
+            t(["mais arriver"], (0.15, 9), "edito", 78, color=CREME),
+            t(["*à~ton~cours,*"], (0.3, 9), "edito", 84.5, color=CAR), GR]},
+        # 3. le fou rire sur le reformer : texte en haut, le visage reste au centre
+        {"dur": 1.8, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_6805", 4.0, (1.0, 1.06)), TOPV,
+            t(["les fous rires"], (0.15, 9), "edito", 9, color=CREME),
+            t(["*sur~le~reformer,*"], (0.3, 9), "edito", 15.5, color=CAR), GR]},
+        # 4. le matcha d'après
+        {"dur": 1.8, "in": "window", "windowDur": 0.7, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_9300", 1.2, (1.04, 1.12)), TOPV,
+            t(["le matcha"], (0.2, 9), "edito", 9, color=CREME),
+            t(["*d'après…*"], (0.35, 9), "edito", 15.5, color=CAR), GR]},
+        # 5. les rires sur le canapé : texte en bas (visages au milieu)
+        {"dur": 1.9, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_3342", 4.5, (1.0, 1.06)), BOTV,
+            t(["ça y ressemble"], (0.15, 9), "edito", 80, color=CREME),
+            t(["*beaucoup.*"], (0.3, 9), "edito", 86.5, color=CAR), GR]},
+        # 6. fin cannelle : l'étiquette 36 € tombe et se balance
+        {"dur": 2.7, "in": "dissolve", "dissolve": 0.6, "out": "fadeblack", "layers": [
+            {"type": "color", "color": CAN}, {"type": "grain", "opacity": .12},
+            t(["le bonheur,"], (0.1, 9), "edito", 12, color=CREME),
+            t(["*ça~se~teste.*"], (0.25, 9), "edito", 18.5, color=CAR),
+            {"type": "pricetag", "x": 200, "y": 720, "at": 0.6, "scale": 1.6, "kicker": "pack découverte", "value": "36 €", "sub": "1 coachée + 1 digitale"},
+            t(["coaché · digital · hybride"], (1.2, 9), "caps", 74, anim="track", color=CREME),
+            t(["Pilates reformer à La Varenne"], (1.35, 9), "caps", 78, anim="track", color=CAR),
+            t(["@soa.reformer · lien en bio"], (1.6, 9), "caps", 88, anim="fade", color=CREME)]},
+    ]}
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     spec = globals()[name]()
