@@ -357,6 +357,109 @@ def e20261107_2():
     ]}
 
 
+def _kit():
+    GC = "saturate(.82) sepia(.2) contrast(1.06) brightness(.94)"
+
+    def v(clip, st, zoom=(1.04, 1.12), speed=1.0, grade=GC, **kw):
+        d = {"type": "video", "clip": clip, "start": st, "zoom": list(zoom), "grade": grade, "speed": speed, "extra": 0.9, "ease": "inout"}
+        d.update(kw); return d
+
+    def t(lines, at, style, y, anim="mask", **kw):
+        d = {"type": "text", "lines": lines, "at": list(at), "style": style, "y": y, "anim": anim, "align": "left", "x": 8.9,
+             "dur": 0.8, "ease": "inout", "stagger": 0.1}
+        d.update(kw); return d
+    return GC, v, t
+
+
+TOPV = {"type": "dim", "color": "linear-gradient(to bottom, rgba(42,28,22,.86), rgba(42,28,22,.5) 30%, rgba(42,28,22,.25) 50%, rgba(42,28,22,.2))"}
+BOTV = {"type": "dim", "color": "linear-gradient(to bottom, rgba(42,28,22,.2), rgba(42,28,22,.3) 50%, rgba(42,28,22,.85))"}
+GR = {"type": "grain", "opacity": .07}
+
+
+def fin_creme(l1, l2, t):
+    return {"dur": 2.8, "in": "dissolve", "dissolve": 0.7, "out": "fadeblack", "layers": [
+        {"type": "color", "color": CREME}, {"type": "grain", "opacity": .1},
+        t(["SOA"], (0.3, 9), "logo", 18, anim="track", color=CHOC),
+        t(["coaché · digital · hybride"], (0.45, 9), "caps", 36, anim="track", color=CAN),
+        t([l1], (0.6, 9), "edito", 44, color=CHOC),
+        t([l2], (0.85, 9), "edito", 50.5, color=CAN),
+        {"type": "rule", "x": 96, "y": 1110, "w": 300, "at": 1.2, "color": CAN},
+        t(["pack découverte"], (1.3, 9), "caps", 62, anim="track", color=CHOC),
+        t(["1 coachée + 1 digitale · 36 €"], (1.45, 9), "caps", 65.5, anim="track", color=CHOC),
+        t(["@soa.reformer · lien en bio"], (1.7, 9), "caps", 88, anim="fade", color=CAN)]}
+
+
+def e20261108_1():
+    """Tendance « Reasons why you don't need to… » (Pepper Agency, 02/11/2026) : la blague est dans le texte,
+    format liste. Adaptation SOA pour les débutant·es intimidé·es : « tu n'as pas besoin d'être souple ».
+    Style classe ; 1 effet signature : carnet (fond rayé + vidéos encadrées + notes épinglées)."""
+    GC, v, t = _kit()
+    CB = "14px solid #F3EADC"
+    return {"scenes": [
+        # 1. accroche : texte en haut, les membres sont allongé·es dans la moitié basse
+        {"dur": 2.2, "in": "fade", "bpm": 120, "layers": [
+            v("IMG_1152", 0.3, (1.0, 1.08)), TOPV,
+            t(["les raisons pour lesquelles"], (0.0, 9), "caps", 9, anim="track", color=CAR),
+            t(["tu n'as pas besoin"], (0.05, 9), "edito", 13, color=CREME),
+            t(["*d'être~souple.*"], (0.2, 9), "edito", 19.5, color=CAR), GR]},
+        # 2. carnet : raisons 1 et 2
+        {"dur": 3.2, "in": "dissolve", "dissolve": 0.6, "layers": [
+            {"type": "stripes"},
+            {"type": "card", "clip": "IMG_9322", "start": 0.2, "box": [70, 300, 470, 660], "at": 0.1, "tilt": -5, "tiltEnd": -3, "grade": GC, "border": CB},
+            {"type": "note", "x": 560, "y": 420, "w": 470, "at": 0.4, "rot": 4, "kicker": "raison n°1", "text": "les ressorts s'adaptent à toi."},
+            {"type": "card", "clip": "IMG_4378", "start": 3.5, "box": [560, 1080, 450, 640], "at": 1.0, "tilt": 6, "tiltEnd": 3, "grade": GC, "border": CB},
+            {"type": "note", "x": 70, "y": 1180, "w": 470, "at": 1.3, "rot": -4, "kicker": "raison n°2", "text": "un coach te corrige. 7 places max."},
+            {"type": "grain", "opacity": .1}]},
+        # 3. carnet : raison 3
+        {"dur": 2.4, "in": "dissolve", "dissolve": 0.5, "layers": [
+            {"type": "stripes"},
+            {"type": "card", "clip": "IMG_6812", "start": 2.0, "box": [90, 260, 560, 800], "at": 0.1, "tilt": -4, "tiltEnd": -2, "grade": GC, "border": CB},
+            {"type": "note", "x": 440, "y": 1160, "w": 520, "at": 0.45, "rot": 3, "kicker": "raison n°3", "text": "tout le monde a commencé un jour."},
+            {"type": "grain", "opacity": .1}]},
+        fin_creme("pas souple ?", "*viens~quand~même.*", t),
+    ]}
+
+
+def e20261108_2():
+    """Tendance « tiny text » (Pepper Agency, 02/11/2026) : de minuscules textes qu'il faut mettre en pause pour lire.
+    Style classe ; 2 effets signature : mot géant DERRIÈRE la personne (« pause. ») + le petit texte caché."""
+    GC, v, t = _kit()
+    Z1 = (1.0, 1.06)
+
+    def tiny(s, at, y, color=CREME):
+        return t([s], (at, 9), "small", y, anim="fade", color=color, size=24, dur=0.4)
+
+    return {"scenes": [
+        # 1. accroche : « pause. » géant derrière la membre jambes en l'air (visage bas, rien dessus)
+        {"dur": 2.6, "in": "fade", "bpm": 120, "layers": [
+            v("B63B1107", 1.0, Z1), {"type": "dim", "color": "rgba(42,28,22,.25)"}, TOPV,
+            t(["lis le petit texte."], (0.0, 9), "edito", 10, color=CREME, size=100),
+            t(["pause."], (0.2, 9), "giant", 47, color=CREME, size=300, dur=1.0),
+            {"type": "cutout", "clip": "B63B1107", "start": 1.0, "zoom": list(Z1), "ease": "inout", "grade": GC, "extra": 0.9},
+            tiny("bravo, tu as mis pause. ton corps aussi aimerait bien.", 0.6, 16), GR]},
+        # 2. cours coaché : texte en haut, au-dessus des têtes
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_3300", 2.0, (1.02, 1.1)), TOPV,
+            t(["en coaché,"], (0.1, 9), "edito", 8, color=CREME),
+            t(["*7~places~max.*"], (0.25, 9), "edito", 14.5, color=CAR),
+            tiny("(7 reformers, 1 coach, et personne ne te juge.)", 0.5, 21.5), GR]},
+        # 3. séance digitale : le doigt lance la séance
+        {"dur": 2.0, "in": "window", "windowDur": 0.7, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_6650", 4.5, (1.02, 1.1)), TOPV,
+            t(["en digital,"], (0.2, 9), "edito", 8, color=CREME),
+            t(["*à~ton~heure.*"], (0.35, 9), "edito", 14.5, color=CAR),
+            tiny("(7j/7, de 7h à 22h30. oui, même le dimanche soir.)", 0.6, 21.5), GR]},
+        # 4. le matcha fouetté
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_9450", 5.0, (1.06, 1.0)), TOPV,
+            t(["et après…"], (0.1, 9), "edito", 8, color=CREME),
+            t(["*le~matcha.*"], (0.25, 9), "edito", 14.5, color=CAR),
+            tiny("(on ne te force pas. mais presque.)", 0.5, 21.5), GR]},
+        fin_creme("tu as tout lu ?", "*tu~mérites~ça.*", t),
+    ]}
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     spec = globals()[name]()
