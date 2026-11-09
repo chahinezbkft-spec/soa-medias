@@ -460,6 +460,51 @@ def e20261108_2():
     ]}
 
 
+def e20261109_2():
+    """Tendance « hook à l'écran, liste complète en légende » (tryvolume.app, santé & bien-être, mesuré le 08/11/2026) :
+    une accroche courte sur du b-roll, 3 points à l'écran, la liste entière dans la légende TikTok.
+    « avant ton premier cours de Pilates… ». Style classe ; 1 effet signature : compteur serif (1 → 2 → 3).
+    Texte et chiffres dans le haut de l'image (plafond), les visages sont dans la moitié basse."""
+    GC, v, t = _kit()
+
+    def num(a, b):
+        return {"type": "counter", "from": a, "to": b, "at": 0.1, "dur": 0.7, "style": "numserif", "x": 8.9, "y": 15,
+                "align": "left", "color": CAR}
+
+    def kick(s):
+        return t([s], (0.15, 9), "caps", 27.5, anim="track", color=CREME)
+
+    return {"scenes": [
+        # 1. accroche : plan large du cours, texte en haut (plafond)
+        {"dur": 2.4, "in": "fade", "bpm": 120, "layers": [
+            v("IMG_3754", 2.5, (1.0, 1.08)), TOPV,
+            t(["avant ton premier"], (0.0, 9), "edito", 9, color=CREME),
+            t(["cours de *Pilates…*"], (0.12, 9), "edito", 15.5, color=CAR),
+            t(["(la liste complète est en légende)"], (0.6, 9), "small", 22, anim="fade", color=CREME), GR]},
+        # 2. n°1 : la coach corrige
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_4126", 7.0, (1.02, 1.1)), TOPV,
+            num(0, 1), kick("ce que personne ne te dit"),
+            t(["7 places max :"], (0.3, 9), "edito", 32, color=CREME),
+            t(["*le~coach~te~voit.*"], (0.45, 9), "edito", 38.5, color=CAR), GR]},
+        # 3. n°2 : une membre seule sur son reformer
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_3962", 1.5, (1.04, 1.12)), {"type": "dim", "color": "linear-gradient(to bottom, rgba(42,28,22,.9), rgba(42,28,22,.72) 42%, rgba(42,28,22,.3) 60%, rgba(42,28,22,.2))"},
+            num(1, 2), kick("ce que personne ne te dit"),
+            t(["tu peux venir"], (0.3, 9), "edito", 32, color=CREME),
+            t(["*seul·e.*"], (0.45, 9), "edito", 38.5, color=CAR), GR]},
+        # 4. n°3 : le matcha d'après (texte en bas : le haut est occupé par le pichet)
+        {"dur": 2.0, "in": "window", "windowDur": 0.7, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_9451", 3.5, (1.04, 1.1)), BOTV,
+            {"type": "counter", "from": 2, "to": 3, "at": 0.1, "dur": 0.7, "style": "numserif", "x": 8.9, "y": 62,
+             "align": "left", "color": CAR},
+            t(["le matcha d'après :"], (0.3, 9), "edito", 79, color=CREME),
+            t(["*sacré.*"], (0.45, 9), "edito", 85.5, color=CAR), GR]},
+        fin_creme("ton premier cours ?", "*on~t'attend.*", t),
+    ]}
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     spec = globals()[name]()
