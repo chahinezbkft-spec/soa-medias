@@ -505,6 +505,55 @@ def e20261109_2():
     ]}
 
 
+def e20261110_2():
+    """Tendance « entrée au ralenti » (son « Pray For Me », New Engen, mise à jour du 05/11/2026) : des entrées filmées
+    au ralenti, énergie « personnage principal ». Adaptation SOA : « ton entrée au cours de Pilates » (rue → QR code →
+    porte → studio → reformer). Style classe ; 2 effets signature : ralenti (speed 0.5–0.6) + texte qui tourne autour
+    de l'offre 36 € sur le carton final. Textes hors des visages : ciel / plafond en haut, jambes en bas."""
+    GC, v, t = _kit()
+    RING = "coaché · digital · hybride · coaché · digital · hybride · "
+    return {"scenes": [
+        # 1. accroche : arrivée dans la rue au ralenti, texte dans le ciel (visages au milieu de l'image)
+        {"dur": 2.2, "in": "fade", "bpm": 120, "layers": [
+            v("IMG_2206", 6.0, (1.0, 1.06), speed=0.5), TOPV,
+            t(["ton entrée au cours"], (0.0, 9), "edito", 7, color=CREME),
+            t(["de *Pilates~:*"], (0.12, 9), "edito", 13.5, color=CAR),
+            t(["(version ralenti)"], (0.6, 9), "caps", 19, anim="track", color=CREME, size=32), GR]},
+        # 2. le QR code à la porte : visage en haut du plan, texte en bas
+        {"dur": 1.6, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_4612", 1.3, (1.02, 1.08), speed=0.6), BOTV,
+            t(["le QR code,"], (0.15, 9), "edito", 79, color=CREME),
+            t(["*scanné.*"], (0.3, 9), "edito", 85.5, color=CAR), GR]},
+        # 3. la porte poussée (de dos), texte en bas
+        {"dur": 1.6, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_4614", 0.2, (1.0, 1.06), speed=0.6), BOTV,
+            t(["la porte,"], (0.15, 9), "edito", 79, color=CREME),
+            t(["*poussée.*"], (0.3, 9), "edito", 85.5, color=CAR), GR]},
+        # 4. le coach accueille : texte au plafond
+        {"dur": 1.8, "in": "window", "windowDur": 0.7, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_4618", 0.8, (1.02, 1.08), speed=0.6), TOPV,
+            t(["le coach,"], (0.2, 9), "edito", 8, color=CREME),
+            t(["*déjà~là.*"], (0.35, 9), "edito", 14.5, color=CAR), GR]},
+        # 5. le cours s'installe : texte au plafond
+        {"dur": 1.8, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_3934", 9.5, (1.0, 1.06), speed=0.6), TOPV,
+            t(["et là…"], (0.15, 9), "edito", 8, color=CREME),
+            t(["*ton~moment.*"], (0.3, 9), "edito", 14.5, color=CAR), GR]},
+        # 6. fin crème : le texte tourne autour de l'offre
+        {"dur": 2.8, "in": "dissolve", "dissolve": 0.6, "out": "fadeblack", "layers": [
+            {"type": "color", "color": CREME}, {"type": "grain", "opacity": .1},
+            t(["SOA"], (0.2, 9), "logo", 11, anim="track", color=CHOC),
+            t(["ton entrée,"], (0.35, 9), "edito", 21, color=CHOC),
+            t(["*on~t'attend.*"], (0.55, 9), "edito", 27.5, color=CAN),
+            {"type": "circletext", "cx": 540, "cy": 1060, "r": 270, "text": RING, "speed": 22, "size": 40, "at": 0.6, "color": CAN},
+            t(["36 €"], (0.8, 9), "numserif", 55, anim="fade", color=CHOC, align="center", x=50, size=200),
+            t(["pack découverte · 1 coachée + 1 digitale"], (1.2, 9), "caps", 76, anim="track", color=CHOC),
+            t(["Pilates reformer à La Varenne"], (1.35, 9), "caps", 80, anim="track", color=CAN),
+            t(["@soa.reformer · lien en bio"], (1.6, 9), "caps", 88, anim="fade", color=CAN)]},
+    ]}
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     spec = globals()[name]()
