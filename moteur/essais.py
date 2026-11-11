@@ -554,6 +554,88 @@ def e20261110_2():
     ]}
 
 
+def e20261111_1():
+    """Tendance « ✕ puis ✓ sans un mot » (Volume, sport/fitness, mesuré le 09/11/2026 : la mauvaise option barrée,
+    la bonne cochée, de courts libellés, aucune parole). Adaptation SOA : « ce soir, ✕ ou ✓ ? » (le canapé vs la séance).
+    Style classe ; 1 effet signature : interrupteur iOS « mode Pilates » qui s'allume. Textes en haut, loin des visages."""
+    GC, v, t = _kit()
+
+    def mark(sym, col, y):
+        return t([sym], (0.05, 9), "edito", y, anim="fade", color=col, size=130, dur=0.4)
+
+    return {"scenes": [
+        # 1. accroche : le studio aux bougies le soir (aucun visage)
+        {"dur": 2.0, "in": "fade", "bpm": 120, "layers": [
+            v("IMG_0867", 1.0, (1.0, 1.08)), TOPV,
+            t(["la version sans un mot"], (0.0, 9), "caps", 9, anim="track", color=CAR),
+            t(["ce soir,"], (0.05, 9), "edito", 13, color=CREME),
+            t(["*✕~ou~✓~?*"], (0.2, 9), "edito", 19.5, color=CAR), GR]},
+        # 2. ✕ : le canapé dans la pénombre
+        {"dur": 1.6, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_0708", 0.0, (1.06, 1.12)), TOPV,
+            mark("✕", CAR, 8),
+            t(["le canapé."], (0.15, 9), "edito", 16, color=CREME),
+            t(["*(encore.)*"], (0.35, 9), "edito", 22.5, color=CAR), GR]},
+        # 3. ✓ : le QR code de réservation sur le téléphone + interrupteur « mode Pilates »
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_6625", 3.6, (1.02, 1.08)), TOPV,
+            mark("✓", CREME, 8),
+            t(["tu réserves."], (0.15, 9), "edito", 16, color=CREME),
+            {"type": "toggle", "x": 96, "y": 470, "at": 0.9, "inAt": 0.4, "label": "mode Pilates"}, GR]},
+        # 4. ✓ : la séance du soir aux bougies
+        {"dur": 1.8, "in": "window", "windowDur": 0.6, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_0704", 1.5, (1.0, 1.06), grade="saturate(.85) sepia(.22) contrast(1.08) brightness(1.15)"), TOPV,
+            mark("✓", CREME, 8),
+            t(["ton moment"], (0.15, 9), "edito", 16, color=CREME),
+            t(["*à~toi.*"], (0.3, 9), "edito", 22.5, color=CAR), GR]},
+        # 5. ✓ : le matcha fouetté
+        {"dur": 1.7, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_9297", 1.0, (1.04, 1.1)), TOPV,
+            mark("✓", CREME, 8),
+            t(["le matcha"], (0.15, 9), "edito", 16, color=CREME),
+            t(["*d'après.*"], (0.3, 9), "edito", 22.5, color=CAR), GR]},
+        fin_creme("ce soir, coche", "*la~bonne~case.*", t),
+    ]}
+
+
+def e20261111_2():
+    """Tendance « long texte empilé sur un clip court » (Volume, mesuré le 09/11/2026 : « les phrases que… »,
+    texte qui s'accumule sur quelques secondes de vidéo). Adaptation SOA : « ce que tu entends à chaque cours de Pilates ».
+    Style classe ; 1 effet signature : mot rempli de vidéo (« Pilates ») sur aplat cannelle. Les phrases s'empilent en haut
+    de l'image ; plans POV (aucun visage) puis plan large où les membres sont dans la moitié basse."""
+    GC, v, t = _kit()
+    PH = [(["« on inspire… »"], CREME), (["« les épaules loin des oreilles. »"], CREME), (["« on rentre le nombril. »"], CREME),
+          (["« ça tremble ? c'est normal. »"], CREME), (["*«~et…~on~relâche.~»*"], CAR)]
+    Y0, DY = 8, 6.4
+
+    def stack(upto, first_new):
+        L = []
+        for i, (lines, col) in enumerate(PH[:upto]):
+            at = (0.1 + 0.75 * (i - first_new)) if i >= first_new else -5
+            L.append(t(lines, (at, 99), "edito", Y0 + DY * i, color=col, size=64, out=False, dur=0.5))
+        return L
+
+    DEEP = {"type": "dim", "color": "linear-gradient(to bottom, rgba(42,28,22,.92), rgba(42,28,22,.75) 36%, rgba(42,28,22,.25) 50%, rgba(42,28,22,.15))"}
+
+    def sc(clip, st, upto, first_new, dur, zoom=(1.02, 1.1), tin="cut"):
+        return {"dur": dur, "in": tin, "out": "cut", "layers": [v(clip, st, zoom), DEEP] + stack(upto, first_new) + [GR]}
+
+    return {"scenes": [
+        # 1. accroche : « Pilates » rempli de vidéo sur aplat cannelle
+        {"dur": 2.2, "in": "fade", "bpm": 120, "layers": [
+            {"type": "color", "color": CAN}, {"type": "grain", "opacity": .1},
+            t(["ce que tu entends"], (0.0, 9), "edito", 22, color=CREME),
+            t(["à *chaque~cours~de*"], (0.12, 9), "edito", 28.5, color=CAR),
+            {"type": "cliptext", "clip": "IMG_2513", "start": 1.0, "lines": ["Pilates"], "size": 270, "y": 38, "at": 0.25},
+            t(["(on a tout noté)"], (0.7, 9), "caps", 62, anim="track", color=CREME, size=30)]},
+        sc("IMG_3002", 0.3, 2, 0, 2.2),
+        sc("IMG_7151", 0.5, 4, 2, 2.2),
+        sc("IMG_2519", 0.5, 5, 4, 1.8, zoom=(1.0, 1.06)),
+        fin_creme("tu les entends ?", "*viens~les~vivre.*", t),
+    ]}
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     spec = globals()[name]()
