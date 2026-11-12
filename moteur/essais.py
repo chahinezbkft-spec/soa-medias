@@ -636,6 +636,74 @@ def e20261111_2():
     ]}
 
 
+def e20261112_1():
+    """Tendance TikTok « go go go » (Ramdam, 10/11/2026) : la voix intérieure « go go go » sur quelqu'un qui avance
+    lentement. Adaptation SOA : en Pilates on va lentement… mais ton cerveau, lui : go go go. Style classe ;
+    1 effet signature : mot géant DERRIÈRE la personne (« go go go » derrière les jambes, visage en bas, rien dessus)."""
+    GC, v, t = _kit()
+    Z1 = (1.0, 1.06)
+    return {"scenes": [
+        # 1. accroche : « go go go » géant derrière les jambes ; la tête est en bas à gauche, texte en haut
+        {"dur": 2.6, "in": "fade", "bpm": 120, "layers": [
+            v("IMG_9422", 0.0, Z1), {"type": "dim", "color": "rgba(42,28,22,.22)"}, TOPV,
+            t(["ton cerveau en *Pilates~:*"], (0.0, 9), "edito", 9, color=CREME, size=96),
+            t(["go go"], (0.2, 9), "giant", 33, color=CREME, size=300, dur=0.9),
+            t(["go."], (0.45, 9), "giant", 47, color=CAR, size=300, dur=0.9),
+            {"type": "cutout", "clip": "IMG_9422", "start": 0.0, "zoom": list(Z1), "ease": "inout", "grade": GC, "extra": 0.9},
+            GR]},
+        # 2. la coach, assise à côté : « lentement. » (texte au plafond, visages au milieu)
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_2183", 3.0, (1.02, 1.1)), TOPV,
+            t(["la coach :"], (0.1, 9), "edito", 8, color=CREME),
+            t(["*«~lentement.~»*"], (0.25, 9), "edito", 14.5, color=CAR), GR]},
+        # 3. la coach accompagne la jambe : le cerveau insiste
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_6470", 1.0, (1.02, 1.1)), TOPV,
+            t(["ton cerveau :"], (0.1, 9), "edito", 8, color=CREME),
+            t(["*go~go~go~go.*"], (0.25, 9), "edito", 14.5, color=CAR), GR]},
+        # 4. le cours au ralenti
+        {"dur": 2.2, "in": "window", "windowDur": 0.7, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_6747", 0.5, (1.0, 1.06), speed=0.6), TOPV,
+            t(["spoiler :"], (0.2, 9), "edito", 8, color=CREME),
+            t(["*lentement,~c'est~plus~dur.*"], (0.35, 9), "edito", 14.5, color=CAR, size=96), GR]},
+        fin_creme("ton cerveau : go.", "*ton~corps~:~merci.*", t),
+    ]}
+
+
+def e20261112_2():
+    """Tendance TikTok « No, that doesn't make any sense » (Ramdam, 03/11/2026) : une situation contradictoire à l'écran,
+    réponse « ça n'a aucun sens ». Adaptation SOA, accroche de saison : « je commence en janvier »… alors que le studio
+    est ouvert ce soir. Style classe ; 1 effet signature : horloge (18:30 → 22:30). Textes au plafond, loin des visages."""
+    GC, v, t = _kit()
+    return {"scenes": [
+        # 1. accroche : le studio aux bougies (aucun visage)
+        {"dur": 2.4, "in": "fade", "bpm": 120, "layers": [
+            v("IMG_0830", 1.0, (1.0, 1.08)), TOPV,
+            t(["tout le monde en novembre :"], (0.0, 9), "caps", 9, anim="track", color=CAR),
+            t(["« je commence"], (0.05, 9), "edito", 13, color=CREME),
+            t(["*en~janvier.~»*"], (0.2, 9), "edito", 19.5, color=CAR), GR]},
+        # 2. le cours bat son plein
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_3298", 0.5, (1.02, 1.1)), TOPV,
+            t(["non, attends…"], (0.1, 9), "edito", 8, color=CREME),
+            t(["*ça~n'a~aucun~sens.*"], (0.25, 9), "edito", 14.5, color=CAR), GR]},
+        # 3. le soir, aux bougies : horloge jusqu'à 22:30
+        {"dur": 2.4, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_0851", 0.5, (1.02, 1.1), grade="saturate(.85) sepia(.22) contrast(1.06) brightness(1.15)"), TOPV,
+            {"type": "clock", "x": 96, "y": 230, "at": 0.15, "from": 1110, "to": 1350, "dur": 1.4, "label": "ouvert 7j/7"},
+            t(["le studio est ouvert"], (0.5, 9), "edito", 27, color=CREME, size=96),
+            t(["*ce~soir.*"], (0.7, 9), "edito", 32.5, color=CAR, size=96), GR]},
+        # 4. le cours : d'ici janvier
+        {"dur": 2.0, "in": "window", "windowDur": 0.7, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_4118", 0.3, (1.0, 1.06)), TOPV,
+            t(["d'ici janvier :"], (0.2, 9), "edito", 8, color=CREME),
+            t(["*7~semaines~de~rythme.*"], (0.35, 9), "edito", 14.5, color=CAR, size=92), GR]},
+        fin_creme("c'est maintenant qu'on", "*construit~un~rythme.*", t),
+    ]}
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     spec = globals()[name]()
