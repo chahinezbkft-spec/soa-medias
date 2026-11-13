@@ -704,6 +704,82 @@ def e20261112_2():
     ]}
 
 
+def e20261113_1():
+    """Tendance TikTok « Oh no, I'm so cringe » (Ramdam, 10/11/2026) : on avoue en texte une vieille croyance ou une
+    ancienne phase un peu gênante. Adaptation SOA : « oh non… j'ai vraiment cru que le Pilates, c'était s'étirer ».
+    Style classe ; 1 effet signature : carnet (fond rayé + vidéo encadrée + note épinglée « mon carnet, avant SOA »).
+    Textes au plafond ou en bas, jamais sur un visage."""
+    GC, v, t = _kit()
+    CB = "14px solid #F3EADC"
+    return {"scenes": [
+        # 1. accroche + carnet : l'ancienne croyance, notée comme dans un journal
+        {"dur": 3.0, "in": "fade", "bpm": 120, "layers": [
+            {"type": "stripes"},
+            t(["oh non…"], (0.0, 9), "edito", 8, color=CREME, size=110),
+            t(["*j'ai~vraiment~cru~ça.*"], (0.15, 9), "edito", 14.5, color=CAR, size=96),
+            {"type": "card", "clip": "IMG_9319", "start": 3.5, "box": [70, 560, 470, 700], "at": 0.3, "tilt": -5, "tiltEnd": -3, "grade": GC, "border": CB},
+            {"type": "note", "x": 560, "y": 760, "w": 460, "at": 0.7, "rot": 4, "kicker": "mon carnet, avant SOA", "text": "le Pilates ? des étirements tranquilles."},
+            {"type": "grain", "opacity": .1}]},
+        # 2. l'effort, en vrai (visage au milieu : texte au plafond)
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.5, "layers": [
+            v("IMG_6788", 4.0, (1.0, 1.06)), TOPV,
+            t(["spoiler :"], (0.1, 9), "edito", 8, color=CREME),
+            t(["*ça~travaille.~beaucoup.*"], (0.25, 9), "edito", 14.5, color=CAR, size=96), GR]},
+        # 3. la planche sur la barre (visages au milieu : texte au plafond)
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_6726", 3.0, (1.0, 1.06)), TOPV,
+            t(["la planche sur le Reformer :"], (0.1, 9), "caps", 8, anim="track", color=CAR),
+            t(["*«~tranquille~»,~disait-on.*"], (0.2, 9), "edito", 12, color=CREME, size=96), GR]},
+        # 4. fin de cours, les mains sur le visage (texte en bas)
+        {"dur": 2.0, "in": "window", "windowDur": 0.7, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_6794", 1.5, (1.0, 1.05)), BOTV,
+            t(["moi, en fin de cours :"], (0.2, 9), "edito", 78, color=CREME, size=92),
+            t(["*plus~jamais~«~tranquille~».*"], (0.35, 9), "edito", 84.5, color=CAR, size=92), GR]},
+        fin_creme("« tranquille » ?", "*viens~vérifier.*", t),
+    ]}
+
+
+def e20261113_2():
+    """Tendance « I just wanna… » (son « Housewife » de Tate McRae ; Later 06/11/2026, NewEngen 05/11/2026 ;
+    Banque d'idées SOA-20261112-INES-03) : « je veux juste… » sur des plans lifestyle. Adaptation SOA : un créneau
+    à 21h, un coach qui corrige, 7 places, un matcha. Style classe ; 1 effet signature : étiquette 36 € qui tombe
+    sur le carton final. Textes au plafond, loin des visages."""
+    GC, v, t = _kit()
+    return {"scenes": [
+        # 1. accroche : le studio du soir aux bougies (aucun visage)
+        {"dur": 2.4, "in": "fade", "bpm": 120, "layers": [
+            v("IMG_0867", 2.0, (1.0, 1.08)), TOPV,
+            t(["je veux juste…"], (0.0, 9), "edito", 9, color=CREME, size=110),
+            t(["*un~créneau~à~21h.*"], (0.3, 9), "edito", 15.5, color=CAR), GR]},
+        # 2. la coach corrige (visages au milieu)
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_1043", 0.2, (1.0, 1.06)), TOPV,
+            t(["je veux juste…"], (0.0, 9), "caps", 8, anim="track", color=CAR),
+            t(["*quelqu'un~qui~me~corrige.*"], (0.15, 9), "edito", 11.5, color=CREME, size=92), GR]},
+        # 3. le cours : 7 places
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_7250", 1.0, (1.0, 1.05)), TOPV,
+            t(["je veux juste…"], (0.0, 9), "caps", 6, anim="track", color=CAR),
+            t(["*7~places,~pas~70.*"], (0.15, 9), "edito", 9.5, color=CREME, size=92), GR]},
+        # 4. le matcha
+        {"dur": 2.0, "in": "window", "windowDur": 0.7, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_9449", 0.3, (1.04, 1.12)), TOPV,
+            t(["et…"], (0.15, 9), "edito", 9, color=CREME),
+            t(["*un~matcha.*"], (0.3, 9), "edito", 15.5, color=CAR), GR]},
+        # 5. fin cannelle : l'étiquette 36 € tombe et se balance
+        {"dur": 2.8, "in": "dissolve", "dissolve": 0.6, "out": "fadeblack", "layers": [
+            {"type": "color", "color": CAN}, {"type": "grain", "opacity": .12},
+            t(["c'est pas"], (0.1, 9), "edito", 12, color=CREME),
+            t(["*trop~demander.*"], (0.25, 9), "edito", 18.5, color=CAR),
+            {"type": "pricetag", "x": 200, "y": 720, "at": 0.6, "scale": 1.6, "kicker": "pack découverte", "value": "36 €", "sub": "1 coachée + 1 digitale"},
+            t(["coaché · digital · hybride"], (1.2, 9), "caps", 74, anim="track", color=CREME),
+            t(["Pilates Reformer · La Varenne"], (1.35, 9), "caps", 78, anim="track", color=CAR),
+            t(["@soa.reformer · lien en bio"], (1.6, 9), "caps", 88, anim="fade", color=CREME)]},
+    ]}
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     spec = globals()[name]()
