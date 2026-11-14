@@ -780,6 +780,83 @@ def e20261113_2():
     ]}
 
 
+def e20261114_1():
+    """Tendance « Answer in one word » (New Engen, mise à jour du 05/11/2026 ; Banque d'idées SOA-20261105-INES-04) :
+    une question, réponse obligatoire en un seul mot. Adaptation SOA (samedi = « le rituel d'après ») :
+    « ta séance de Pilates en un mot ? » → lentement. tremblements. fierté. … matcha.
+    Style classe ; 1 effet signature : texte qui tourne autour du verre de matcha. Textes au plafond, loin des visages."""
+    GC, v, t = _kit()
+    RING = "le rituel d'après · le rituel d'après · le rituel d'après · "
+
+    def mot(w):
+        return t([f"*«~{w}~»*"], (0.1, 9), "edito", 10, color=CREME, size=150)
+
+    def kick(s):
+        return t([s], (0.0, 9), "caps", 6, anim="track", color=CAR)
+
+    return {"scenes": [
+        # 1. accroche : le studio en lumière du jour (personnes petites, au milieu de l'image)
+        {"dur": 2.0, "in": "fade", "bpm": 120, "layers": [
+            v("IMG_0897", 0.3, (1.0, 1.08)), TOPV,
+            t(["ta séance de Pilates"], (0.0, 9), "edito", 8, color=CREME),
+            t(["*en~un~mot~?*"], (0.12, 9), "edito", 14.5, color=CAR, size=130),
+            t(["(un seul. pas deux.)"], (0.6, 9), "caps", 21, anim="track", color=CREME, size=30), GR]},
+        # 2. la coach ajuste (têtes vers 30 % : texte au-dessus)
+        {"dur": 1.6, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_4218", 2.0, (1.0, 1.06)), TOPV, kick("réponse n°1"), mot("lentement."), GR]},
+        # 3. fentes synchronisées (visages au milieu)
+        {"dur": 1.6, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_3069", 0.5, (1.0, 1.06)), TOPV, kick("réponse n°2"), mot("tremblements."), GR]},
+        # 4. à genoux, bras dans les sangles (visages au milieu)
+        {"dur": 1.6, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_2717", 0.5, (1.0, 1.06)), TOPV, kick("réponse n°3"), mot("fierté."), GR]},
+        # 5. le matcha versé : le texte tourne autour du verre (aucun visage)
+        {"dur": 2.4, "in": "window", "windowDur": 0.7, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_9451", 9.6, (1.02, 1.06)), TOPV,
+            kick("et après la séance :"),
+            t(["*«~matcha.~»*"], (0.15, 9), "edito", 10, color=CREME, size=150),
+            {"type": "circletext", "cx": 540, "cy": 1330, "r": 330, "text": RING, "speed": 20, "size": 36, "at": 0.4, "color": CREME},
+            GR]},
+        fin_creme("et toi, en un mot ?", "*dis-le~en~commentaire.*", t),
+    ]}
+
+
+def e20261114_2():
+    """Movember (tout novembre ; SocialPilot 30/10/2026) + Banque d'idées SOA-20261112-INES-04 « ton pote dit que le
+    Pilates, c'est pas pour lui » : récit en 3 temps (minute 0 / 10 / 45), puis compteur des jours qui restent.
+    Style classe ; 1 effet signature : compteur serif 30 → 16 (jours restants de novembre au 14/11).
+    Textes au plafond ou en bas, jamais sur un visage."""
+    GC, v, t = _kit()
+    return {"scenes": [
+        # 1. accroche : deux potes debout dans le studio (têtes vers 30 % : texte au-dessus)
+        {"dur": 2.4, "in": "fade", "bpm": 120, "layers": [
+            v("IMG_6778", 0.5, (1.0, 1.06)), TOPV,
+            t(["movember"], (0.0, 9), "caps", 5.5, anim="track", color=CAR),
+            t(["ton pote :"], (0.1, 9), "edito", 9.5, color=CREME, size=110),
+            t(["*«~pas~pour~moi.~»*"], (0.3, 9), "edito", 16, color=CAR, size=120), GR]},
+        # 2. minute 10 : allongés, l'effort (visages au milieu)
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_6782", 1.2, (1.0, 1.05)), TOPV,
+            t(["minute 10 :"], (0.0, 9), "caps", 6, anim="track", color=CAR),
+            t(["*«~ah.~d'accord.~»*"], (0.1, 9), "edito", 10, color=CREME, size=120), GR]},
+        # 3. minute 45 : le poing levé (visage au milieu)
+        {"dur": 2.0, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_6800", 1.0, (1.0, 1.05)), TOPV,
+            t(["minute 45 :"], (0.0, 9), "caps", 6, anim="track", color=CAR),
+            t(["*«~on~revient~quand~?~»*"], (0.1, 9), "edito", 10, color=CREME, size=110), GR]},
+        # 4. le groupe s'étire : compteur en bas (têtes en haut, jambes en bas)
+        {"dur": 2.6, "in": "window", "windowDur": 0.7, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_6826", 2.2, (1.02, 1.08)), BOTV,
+            {"type": "counter", "from": 30, "to": 16, "at": 0.2, "dur": 1.2, "style": "numserif", "x": 8.9, "y": 66,
+             "align": "left", "color": CAR},
+            t(["jours de Movember"], (0.5, 9), "edito", 79, color=CREME, size=96),
+            t(["*pour~l'emmener.*"], (0.65, 9), "edito", 85.5, color=CAR, size=110), GR]},
+        fin_creme("ton binôme ?", "*on~vous~attend.*", t),
+    ]}
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     spec = globals()[name]()
