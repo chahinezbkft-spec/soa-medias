@@ -857,6 +857,83 @@ def e20261114_2():
     ]}
 
 
+def e20261115_1():
+    """Tendance « My Moon My Man » / soft launch (NewEngen 13/11/2026 ; #mymoonmyman +93 % sur la semaine, howtogoviral) :
+    montage doux de détails de « quelqu'un de spécial », sans montrer qui, puis la révélation. Adaptation SOA :
+    le soft launch… de ton Reformer. Style classe ; 1 effet signature : interrupteur iOS « en couple » qui s'allume
+    à la révélation. Aucun visage à l'écran sauf de dos ; textes au plafond."""
+    GC, v, t = _kit()
+    return {"scenes": [
+        # 1. accroche : POV pied en chaussette rose sur la barre (aucun visage)
+        {"dur": 2.4, "in": "fade", "bpm": 120, "layers": [
+            v("IMG_9418", 0.3, (1.0, 1.08)), TOPV,
+            t(["soft launch"], (0.0, 9), "caps", 6, anim="track", color=CAR),
+            t(["je te présente"], (0.1, 9), "edito", 9.5, color=CREME, size=110),
+            t(["*quelqu'un~de~spécial.*"], (0.3, 9), "edito", 16, color=CAR, size=110), GR]},
+        # 2. le matcha fouetté (mains seulement)
+        {"dur": 1.8, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_9297", 1.0, (1.02, 1.08)), TOPV,
+            t(["on a nos rituels."], (0.0, 9), "edito", 8, color=CREME),
+            t(["*matcha~d'abord.*"], (0.15, 9), "edito", 14.5, color=CAR), GR]},
+        # 3. la membre de dos aux sangles (tête vers 35 % : texte au-dessus)
+        {"dur": 1.8, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_1462", 4.0, (1.0, 1.05)), TOPV,
+            t(["il me fait travailler."], (0.0, 9), "edito", 8, color=CREME),
+            t(["*et~j'adore~ça.*"], (0.15, 9), "edito", 14.5, color=CAR), GR]},
+        # 4. hard launch : le Reformer (aucun visage) + interrupteur « en couple »
+        {"dur": 2.6, "in": "window", "windowDur": 0.7, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_6651", 0.5, (1.02, 1.08)), TOPV,
+            t(["hard launch :"], (0.15, 9), "edito", 8, color=CREME),
+            t(["*mon~Reformer.*"], (0.35, 9), "edito", 14.5, color=CAR, size=130),
+            {"type": "toggle", "x": 96, "y": 520, "at": 1.1, "inAt": 0.6, "label": "en couple", "size": 52}, GR]},
+        fin_creme("ton soft launch ?", "*on~vous~présente.*", t),
+    ]}
+
+
+def e20261115_2():
+    """Tendance « survival stories » en jours numérotés (NewEngen 13/11/2026, « Zombie Outbreak Survival Stories » :
+    récit à la 2e personne, « jour 1… jour 3… », texte à l'écran sans voix). Adaptation SOA : survivre à novembre
+    (il fait nuit à 17h) : jour 1, jour 3 l'abri, jour 7 le clan, jour 12 les provisions. Style classe ; 1 effet
+    signature : « jour 1 » géant DERRIÈRE la membre (vue de dos). Textes au plafond, jamais sur un visage."""
+    GC, v, t = _kit()
+    Z1 = (1.0, 1.08)
+
+    def small(s, at, y):
+        return t([s], (at, 9), "caps", y, anim="fade", color=CREME, size=28)
+
+    return {"scenes": [
+        # 1. accroche : « jour 1 » derrière la membre debout sur le Reformer (de dos)
+        {"dur": 2.8, "in": "fade", "bpm": 120, "layers": [
+            v("IMG_9426", 3.4, Z1), {"type": "dim", "color": "rgba(42,28,22,.2)"}, TOPV,
+            t(["novembre · il fait nuit à 17h"], (0.0, 9), "caps", 6, anim="track", color=CAR),
+            t(["survivre à novembre,"], (0.1, 9), "edito", 9.5, color=CREME, size=100),
+            t(["jour"], (0.3, 9), "giant", 38, color=CREME, size=300, dur=1.0),
+            t(["1."], (0.55, 9), "giant", 52, color=CAR, size=420, dur=1.0),
+            {"type": "cutout", "clip": "IMG_9426", "start": 3.4, "zoom": list(Z1), "ease": "inout", "grade": GC, "extra": 0.9},
+            GR]},
+        # 2. jour 3 : l'abri (travelling depuis l'entrée)
+        {"dur": 1.8, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("4B902891", 0.5, (1.0, 1.06)), TOPV,
+            t(["jour 3 :"], (0.0, 9), "caps", 6, anim="track", color=CAR),
+            t(["*tu~trouves~un~abri.*"], (0.1, 9), "edito", 9.5, color=CREME, size=110),
+            small("ouvert 7j/7, de 7h à 22h30.", 0.5, 17), GR]},
+        # 3. jour 7 : le clan (visages au milieu : texte au plafond)
+        {"dur": 1.8, "in": "dissolve", "dissolve": 0.4, "layers": [
+            v("IMG_3062", 1.0, (1.0, 1.05)), TOPV,
+            t(["jour 7 :"], (0.0, 9), "caps", 6, anim="track", color=CAR),
+            t(["*tu~as~un~clan.*"], (0.1, 9), "edito", 9.5, color=CREME, size=110),
+            small("7 places max. personne ne reste seul·e.", 0.5, 17), GR]},
+        # 4. jour 12 : les provisions (le matcha, cadré sous le visage)
+        {"dur": 1.8, "in": "window", "windowDur": 0.7, "windowFrom": 24, "layers": [
+            {"type": "color", "color": CREME},
+            v("IMG_3008", 0.5, (1.02, 1.08)), TOPV,
+            t(["jour 12 :"], (0.15, 9), "caps", 6, anim="track", color=CAR),
+            t(["*les~provisions.*"], (0.25, 9), "edito", 9.5, color=CREME, size=110), GR]},
+        fin_creme("ton jour 1 ?", "*c'est~quand~tu~veux.*", t),
+    ]}
+
+
 if __name__ == "__main__":
     name = sys.argv[1]
     spec = globals()[name]()
