@@ -94,8 +94,12 @@ def render(spec, out):
     html = os.path.join(os.path.dirname(os.path.abspath(__file__)), "_stage.html")
     open(html, "w", encoding="utf-8").write(PAGE.replace("/*SPEC*/null", json.dumps(spec)))
     nf = int(round(total * FPS))
+    # Piste son muette obligatoire : sans piste audio, Instagram refuse la vidéo (erreur 2207082)
+    # quand on lui demande d'ajouter un son tendance à la publication.
     ff = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "image2pipe", "-framerate", str(FPS), "-c:v", "mjpeg", "-i", "-",
-                           "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-pix_fmt", "yuv420p", "-movflags", "+faststart", tmp],
+                           "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
+                           "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-pix_fmt", "yuv420p",
+                           "-c:a", "aac", "-b:a", "128k", "-shortest", "-movflags", "+faststart", tmp],
                           stdin=subprocess.PIPE)
     with sync_playwright() as p:
         b = p.chromium.launch(**({"executable_path": CHROME} if CHROME else {}), args=["--allow-file-access-from-files"])

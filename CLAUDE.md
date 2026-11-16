@@ -23,7 +23,7 @@ au 111 avenue du Bac, La Varenne (Saint-Maur-des-Fossés). Compte : @soa.reforme
 - On tutoie, écriture neutre (« seul·e », « ami·e »), jamais uniquement au féminin.
 - Accroche lisible dans la première seconde, coupes toutes les 1,5 à 2,5 s, fin avec l'offre :
   « coaché · digital · hybride » + « pack découverte : 1 coachée + 1 digitale · 36 € » (fonction END()) et @soa.reformer.
-- Pas de musique dans le fichier : le son tendance est ajouté dans Instagram / TikTok.
+- Pas de musique dans le fichier : le son tendance est ajouté dans Instagram / TikTok. Mais toujours une piste son MUETTE (AAC) dans le MP4, sinon Instagram refuse la vidéo (erreur 2207082).
 - Ne montrer des visages que de personnes qui ont donné leur accord.
 
 ## Reels d'essai
